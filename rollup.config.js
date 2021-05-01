@@ -8,20 +8,22 @@ import commonjs from 'rollup-plugin-commonjs';
 export default [
     {
         input: './src/index.js',
-        globals: {
-            'react': 'React',
-            'react-dom': 'ReactDOM'
-        },
         output: [
             {
                 file: 'dist/index.js',
                 format: 'cjs',
+            },
+            {
+                file: 'dist/index.es.js',
+                format: 'es',
+                exports: 'named',
             }
         ],
         plugins: [
             babel({
                 exclude: 'node_modules/**',
-                presets: ['@babel/preset-react']
+                presets: ['@babel/preset-react'],
+                runtimeHelpers: true,
             }),
             external(),
             resolve(),
